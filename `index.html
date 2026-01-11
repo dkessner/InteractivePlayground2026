@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Playground 2026</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/opencv.js/4.5.3/opencv.min.js"></script>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <script src="scene.js"></script>
+  <script src="faceDetectionScene.js"></script>
+  <script src="bodyDetectionScene.js"></script>
+  <script>
+    let scenes = [];
+    let currentSceneIndex = 0;
+
+    function setup() {
+      createCanvas(640, 480);
+      scenes.push(new FaceDetectionScene());
+      scenes.push(new BodyDetectionScene());
+      currentScene = scenes[currentSceneIndex];
+    }
+
+    function draw() {
+      background(255);
+      currentScene.display();
+    }
+
+    function keyPressed() {
+      if (key === '1') {
+        currentSceneIndex = 0;
+      } else if (key === '2') {
+        currentSceneIndex = 1;
+      }
+      currentScene = scenes[currentSceneIndex];
+    }
+  </script>
+</body>
+</html>
